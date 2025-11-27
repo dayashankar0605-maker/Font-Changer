@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Font Changer</title>
+
+  <!-- Load ALL 50+ fonts for live preview -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Lato:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&family=Merriweather:ital,wght@0,300..900;1,300..900&family=Ubuntu:ital,wght@0,300..700;1,300..700&family=PT+Sans:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=PT+Serif:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Slabo+27px:wght@400&family=Noto+Sans+JP:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Titillium+Web:ital,wght@0,200..700;1,200..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Fira+Sans:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic:wght@400;700;800&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR:wght@100..900&family=Quicksand:wght@300..700&family=Nunito+Sans:ital,wght@0,200..1000;1,200..1000&family=PT+Sans+Narrow:wght@400;700&family=Inconsolata:wdth,wght@62.5..200,200..900&family=Heebo:wght@100..900&family=Arimo:ital,wght@0,400..700;1,400..700&family=Dosis:wght@200..800&family=Oxygen:wght@300;400;700&family=Noto+Sans+TC:wght@100..900&family=Karla:ital,wght@0,200..800;1,200..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400..700;1,400..700&family=Cabin:ital,wght@0,400..700;1,400..700&family=Barlow:ital,wght@0,100..900;1,100..900&family=Bitter:ital,wght@0,100..900;1,100..900&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Hind:wght@300..700&family=Mukta:wght@200..800&family=Anton:wght@400&display=swap">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 340px; font-family: system-ui, sans-serif; background: #f9f9fb; }
+    .container { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .header { background: linear-gradient(135deg, #667eea, #764ba2); padding: 18px; text-align: center; color: white; }
+    .header h2 { font-size: 20px; font-weight: 600; }
+    .content { padding: 20px; }
+
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px; }
+
+    select, input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+    .inline { display: flex; gap: 10px; }
+    .inline > div { flex: 1; }
+
+    .button-group { display: flex; gap: 10px; margin: 16px 0; }
+    button { flex: 1; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    #apply-btn { background: #667eea; color: white; }
+    #reset-btn { background: #f0f0f0; color: #555; }
+
+    #result { margin-top: 12px; padding: 10px; background: #f0f8ff; border-left: 4px solid #667eea; font-size: 13px; }
+
+    .exceptions-section { margin-top: 20px; border-top: 1px solid #eee; padding-top: 16px; }
+    #exception-url { margin-bottom: 8px; }
+    #add-exception { background: #4CAF50; color: white; width: 100%; margin-bottom: 10px; }
+    #exceptions-list { list-style: none; }
+    #exceptions-list li {
+      display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;
+    }
+    #exceptions-list button {
+      background: #f44336; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px;
+    }
+
+    #font-family { height: 38px; }
+    #font-family option { font-family: inherit !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Font Changer</h2>
+    </div>
+
+    <div class="content">
+
+        <div class="form-group">
+          <label>Font Family</label>
+          <select id="font-family" size="1"></select>
+        </div>
+
+ <!-- weight -->
+      <div class="form-group inline">
+        <div>
+          <label>Weight</label>
+          <select id="font-weight"></select>
+        </div>
+        <div>
+          <label>Style</label>
+          <select id="font-style">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="apply-btn">Apply Globally</button>
+        <button id="reset-btn">Reset</button>
+      </div>
+
+      <div id="result">Choose a font and apply.</div>
+
+      <div class="exceptions-section">
+        <h3 style="font-size:14px; margin-bottom:8px;">Exceptions</h3>
+        <input id="exception-url" type="text" placeholder="https://example.com">
+        <button id="add-exception">Add Exception</button>
+        <ul id="exceptions-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
